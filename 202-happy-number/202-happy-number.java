@@ -11,7 +11,7 @@ class Solution {
             }
             n = sum;
         }
-        while(sum >= 9);
+        while(sum > 9);
         
         if(sum == 1 || sum == 7)
             return true;
