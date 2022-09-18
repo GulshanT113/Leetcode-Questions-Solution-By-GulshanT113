@@ -16,7 +16,7 @@ class Solution {
                 else if(nums[low] + nums[high] < sum) low++;
                 else high--; 
             }
-          } 
+          } // dobara karna h apne solution ke sath
         }
         return res;
     }
