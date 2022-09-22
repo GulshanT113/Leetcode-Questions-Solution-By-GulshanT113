@@ -11,12 +11,14 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
 		ListNode p = null, c = head, n = head;
-        while(c != null){
-            n = c.next;
-            c.next = p;
-            p = c;
-            c = n;
-        }
-        return p;
+        return revRecursion(p, c, n);
+    }
+    public ListNode revRecursion(ListNode p, ListNode c, ListNode n){
+        if(c == null) return p;
+        n = c.next;
+        c.next = p;
+        p = c;
+        c = n;
+        return revRecursion(p, c, n);
     }
 }  
