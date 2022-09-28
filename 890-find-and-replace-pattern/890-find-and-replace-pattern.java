@@ -1,27 +1,36 @@
 class Solution {
     public List<String> findAndReplacePattern(String[] words, String pattern) {
-        List<String> ans = new ArrayList<>();
-        for(String str : words) {
-            if(isIsomorphic(str, pattern)) ans.add(str);
+        List<String> res = new ArrayList<>();
+        for (String word : words) {
+            if (check(word, pattern)) res.add(word);
         }
-        return ans;
+        return res;
     }
-    public boolean isIsomorphic(String s, String t) {
-        if(s.length() != t.length())
-            return false;
-        Map<Character, Character> hm = new HashMap<>();
-        for(int i = 0; i < s.length(); i++){
-            char a = s.charAt(i);
-            char b = t.charAt(i);
-            if(hm.containsKey(a)){
-                if(b != hm.get(a))
-                    return false;
+    
+    boolean check(String word, String pattern) {
+        for (int i = 0; i < word.length(); i++) {
+            int idx_word = 0, idx_pattern = 0;
+            char ch = word.charAt(i);
+            char sh = pattern.charAt(i);
+            
+            for(int j = 0; j < word.length(); j++){// check the index of ch in word string
+                char target = word.charAt(j);
+                if(target == ch){
+                    idx_word = j;
+                    break;
+                }
             }
-            else{
-                if(hm.containsValue(b)) return false;
-                hm.put(a, b);
+            
+             for(int k = 0; k < pattern.length(); k++){ // check the index of sh in pattern string
+                char target2 = pattern.charAt(k);
+                if(target2 == sh){
+                    idx_pattern = k;
+                    break;
+                }
             }
-        }    
+            
+            if(idx_word != idx_pattern) return false;
+        }
         return true;
     }
 }
