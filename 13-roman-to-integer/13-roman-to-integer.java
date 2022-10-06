@@ -5,9 +5,8 @@ class Solution {
         int ans = 0;
         int temp = 0;
         for(int i = str.length()-1; i >= 0; i--){
-            char ch = str.charAt(i);
             for(int j = 0; j < romanArr.length; j++){
-                if(ch == romanArr[j]){
+                if(str.charAt(i) == romanArr[j]){
                     int val = integerArr[j];
                     if (val >= temp) ans += val;
                     else ans -= val;
