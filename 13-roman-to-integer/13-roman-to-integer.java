@@ -1,24 +1,20 @@
 class Solution {
-    public int romanToInt(String s) {
-        HashMap<Character,Integer>hm=new HashMap<>();
-        hm.put('I',1);hm.put('V',5);hm.put('X',10);hm.put('L',50);hm.put('C',100);hm.put('D',500);
-        hm.put('M',1000);
-        int sum=0;
-        Stack<Integer> st = new Stack<>();
-        for(int i = 0; i < s.length(); i++){
-            char ch = s.charAt(i);
-            if(st.isEmpty()) st.push(hm.get(ch));
-            else{
-                int temp = hm.get(ch);
-                if(st.peek() < temp) {
-                    int a = st.pop();
-                    st.push(a*-1);
-                    st.push(temp);
-                }
-                else st.push(temp);
-            }
+    public int romanToInt(String str) {
+        int[] integerArr = { 1000, 500,  100,  50,  10,  5, 1 };
+        char[] romanArr = {'M', 'D', 'C', 'L', 'X', 'V', 'I' };
+        int ans = 0;
+        int temp = 0;
+        for(int i = str.length()-1; i >= 0; i--){
+            char ch = str.charAt(i);
+            for(int j = 0; j < romanArr.length; j++){
+                if(ch == romanArr[j]){
+                    int val = integerArr[j];
+                    if (val >= temp) ans += val;
+                    else ans -= val;
+                    temp = val;
+                } 
+            }       
         }
-        while(!st.isEmpty()) sum = sum + st.pop();
-        return sum;
+        return ans;
     }
 }
