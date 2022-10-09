@@ -1,30 +1,27 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> hm = new HashMap<>();
-        for(int i : nums)  hm.put(i, hm.getOrDefault(i, 0) + 1);
         PriorityQueue<Pair> pq = new PriorityQueue<>();
+        for(int i : nums) hm.put(i, hm.getOrDefault(i, 0) + 1);
         for(int key : hm.keySet()) pq.add(new Pair(key, hm.get(key)));
+        int[] ans = new int[k];
+        int idx = 0;
         while(pq.size() > k) pq.remove();
-        int arr[] = new int[pq.size()], idx = 0;
-        while(!pq.isEmpty()){
-            Pair remove = pq.remove();
-            arr[idx++] = remove.key;
+        while(!pq.isEmpty()) {
+            Pair rem = pq.remove();
+            ans[idx++] = rem.key;
         }
-        return arr;
+        return ans;
     }
     class Pair implements Comparable<Pair>{
         int key;
-        int val;
-        Pair(int key, int val){
+        int value;
+        Pair(int key, int value){
             this.key = key;
-            this.val = val;
+            this.value = value;
         }
-        @Override
         public int compareTo(Pair other){
-            // if(this.len == other.len){
-            //     return this.idx - other.idx;
-            // }
-            return this.val - other.val;
+            return this.value - other.value;
         }
     }
 }
