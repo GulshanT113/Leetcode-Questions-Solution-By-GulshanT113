@@ -11,16 +11,26 @@
 class Solution {
     public ListNode oddEvenList(ListNode head) {
         if(head == null || head.next == null || head.next.next == null) return head;
-        ListNode even = head.next;
-        ListNode a = head;
-        ListNode b = head.next;
-        while(b != null && b.next != null){
-            a.next = a.next.next;
-            b.next = b.next.next;
-            a = a.next;
-            b = b.next;
+        int c = 1;
+        ListNode dummy = head;
+        while(dummy.next != null){
+            dummy = dummy.next;
+            c++;
         }
-        a.next = even;
-        return head;
+        int half = c/2;
+        // System.out.println(half);
+        ListNode end = dummy;
+        ListNode start = head;
+        ListNode holder = start;
+        int i = 0;
+        while(i < half){
+            end.next = start.next;
+            start.next = start.next.next;
+            end.next.next = null;
+            start = start.next;
+            end = end.next;
+            i++;
+        }
+        return holder;
     }
 }
